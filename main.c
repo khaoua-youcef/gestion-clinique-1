@@ -1,4 +1,4 @@
-//khaoua youcef
+//khaoua youcef et khedouci akli
 #include <stdio.h>
 #include<stdlib.h>
 #include "structures.h"
