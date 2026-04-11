@@ -179,9 +179,9 @@ while (fgets(phrase, 300, listesdespatiant) != NULL) {
 } if (reponse == 8)
 {
     ticketplus(&compteur);
-    printf("le nombre totales des pataient est %d",compteur);
+    printf("le nombre totales des pataient est %d \n",compteur);
     nombretotales = numerodessortie + numerodestransmit +numerodobservation ;
-    printf("c est juste pour verifier le nombre totales =%d",nombretotales);
+    printf("c est juste pour verifier le nombre totales =%d\n",nombretotales);
 }
 if (reponse == 6)
 {
@@ -200,13 +200,13 @@ filedobservations= fopen("fichier2.txt","w");
 }
 if (reponse == 5)
 {
-    printf("le nmbre des persones sortie est : %d",numerodessortie);
+    printf("le nmbre des persones sortie est : %d \n",numerodessortie);
 }if (reponse == 7)
 {
-    printf("le nombre des perssone sous observation est :%d",numerodobservation);
+    printf("le nombre des perssone sous observation est\n :%d",numerodobservation);
 }if (reponse == 9)
 {
-    printf("le nombre des perssone transmis est :%d",numerodestransmit);
+    printf("le nombre des perssone transmis est :%d \n",numerodestransmit);
 }
 
 
