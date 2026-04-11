@@ -41,7 +41,7 @@ listesdObservation *debutdobservations = NULL;
 reponse=1;
     while (reponse !=0)
 {
-printf ("vous voulez faire quoi :\n");
+printf ("\n vous voulez faire quoi :\n");
 printf("0-arrter le programme-\n");
 printf ("1-prendre un ticket-\n");
  printf("2-inisialisation de la file d observation\n -");
@@ -52,6 +52,7 @@ printf ("1-prendre un ticket-\n");
         printf(" 7-le nombre de patient observes-\n");
        printf("  8-le nombre des patient en totales-\n  ");
        printf("9-le nombre des patiant transmis-\n") ;
+       printf("10-afficher la liste d observation-\n");
 
 scanf ("%d",&reponse);
 
@@ -208,6 +209,22 @@ if (reponse == 5)
 {
     printf("le nombre des perssone transmis est :%d \n",numerodestransmit);
 }
+if (reponse == 10);
+{
+    filedobservations = fopen("fichier2.txt","r");
+    if (filedobservations == NULL)
+    {
+        printf("la liste est vide");
+    } else {
+    
+            filedobservations= fopen("fichier2.txt","r");
+while (fgets(phrase, 300, filedobservations) != NULL) {
+    printf("%s", phrase);
+}
+
+    
+
+    }
 
 
 
