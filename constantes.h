@@ -2,6 +2,6 @@
 #define CONSTANTES_H
 
 #define MAXNOM 50
-#define MAXSEX 20
+#define MAXSEXE 20
 
 #endif  //khaoua youcef

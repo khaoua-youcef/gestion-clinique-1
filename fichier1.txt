@@ -1,4 +1,0 @@
-ticket numero : 1  / nom et prenom:khaoua youcef / age:19 / Sex:homme 
-ticket numero : 2  / nom et prenom:khaoua youcef / age:19 / Sex:homme 
-ticket numero : 3  / nom et prenom:mariya / age:11 / Sex:f 
-ticket numero : 4  / nom et prenom:mama / age:48 / Sex:F 

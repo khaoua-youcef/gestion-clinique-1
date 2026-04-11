@@ -4,10 +4,10 @@
 typedef struct {
     char nom[MAXNOM];
     int age ;
-    char sex[MAXSEX];
+    char sexe[MAXSEXE];
     int ticket ;
 } patient ;
-
+  
 typedef struct tnode node ;
 typedef node *list;
 
@@ -20,9 +20,9 @@ typedef struct {
     node *debut;
     node *fin;
 } Filedattente;
-typedef struct obs_node {
+typedef struct Observation {
     patient record;
-    int numero_lit;
-    struct obs_node *next;
+    int numerolit;
+    struct Observation *next;
 } listesdObservation;
 #endif //khaoua youcef
