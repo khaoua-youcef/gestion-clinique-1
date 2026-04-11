@@ -1,4 +1,4 @@
-//khaoua youcef et khedouci akli
+//khaoua youcef 
 #include <stdio.h>
 #include<stdlib.h>
 #include "structures.h"
@@ -41,7 +41,7 @@ listesdObservation *debutdobservations = NULL;
 reponse=1;
     while (reponse !=0)
 {
-printf ("\n vous voulez faire quoi :\n");
+printf ("             vous voulez faire quoi :\n");
 printf("0-arrter le programme-\n");
 printf ("1-prendre un ticket-\n");
  printf("2-inisialisation de la file d observation\n -");
@@ -168,14 +168,14 @@ else if (reponse == 4)
     listesdespatiant = fopen("fichier1.txt", "r");
     if (listesdespatiant == NULL)
     {
-        printf("la file d attente est vide\n");
+        printf("\n la file d attente est vide\n");
     } else
     {
-        listesdespatiant= fopen("fichier1.txt","r");
+        
 while (fgets(phrase, 300, listesdespatiant) != NULL) {
     printf("%s", phrase);
 }
-    }
+    }fclose(listesdespatiant);
     
 } if (reponse == 8)
 {
@@ -209,18 +209,17 @@ if (reponse == 5)
 {
     printf("le nombre des perssone transmis est :%d \n",numerodestransmit);
 }
-if (reponse == 10);
+if (reponse == 10)
 {
     filedobservations = fopen("fichier2.txt","r");
     if (filedobservations == NULL)
     {
-        printf("la liste est vide");
+      printf("\n la file est vide");
     } else {
     
-            filedobservations= fopen("fichier2.txt","r");
 while (fgets(phrase, 300, filedobservations) != NULL) {
     printf("%s", phrase);
-}
+} fclose(filedobservations);
 
     
 
@@ -232,4 +231,4 @@ while (fgets(phrase, 300, filedobservations) != NULL) {
 }
 }
 return 0 ;
-}  // mini projet
+}  
