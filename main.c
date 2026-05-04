@@ -30,22 +30,28 @@ void attribuerlit(listesdObservation *observation, int *nombrelits)
 int main ()
 {
     int nombre = 0 ;
- FILE *listesdespatiant=NULL ;
-    int reponse , compteur,traitement ;
+    FILE *listesdespatiant=NULL ;
+    int reponse, traitement ;
     patient p ;
     Filedattente file ;
+    char phrase[300];
+    int numerodobservation  = 0;
+    int numerodessortie = 0 ;
+    int numerodestransmit = 0 ;
+    int nombretotales =0 ;
+    int nombrelits = 0;
+    FILE *filedobservations = NULL;
+    listesdObservation *debutdobservations = NULL;
+    listesdObservation *chainedobservation = NULL;
+    node *chaine = NULL;
+    node *sort = NULL;
+    node *courant = NULL;
+    node *suivant = NULL;
+    int i = 0;
+
     file.debut = NULL;
     file.fin = NULL;
-char phrase[300];
-int numerodobservation  = 0;
-int numerodessortie = 0 ;
-int numerodestransmit = 0 ;
-int nombretotales =0 ;
-int nombrelits = 0;
-
-FILE *filedobservations = NULL;
-listesdObservation *debutdobservations = NULL;
-reponse=1;
+    reponse=1;
     while (reponse !=0)
 {
 printf ("             Que voulez-vous faire ?\n");
@@ -79,7 +85,7 @@ printf("Veuillez remplir vos informations\n");
     listesdespatiant= fopen("fichier1.txt","a");
     fprintf(listesdespatiant,"Ticket numéro : %d  / Nom et prénom : %s / Âge : %d / Sexe : %s \n",p.ticket,p.nom,p.age,p.sexe);
     fclose(listesdespatiant);
-    node *chaine=malloc(sizeof(node));
+	    chaine=malloc(sizeof *chaine);
     chaine->record=p;
     chaine->next=NULL;
     if (file.debut == NULL)
@@ -111,7 +117,7 @@ else if (reponse == 4)
         printf ("La file d'attente dans la RAM est vide\n");
     } else
     {
-        node *sort = file.debut;
+	        sort = file.debut;
         printf("\nLe patient %s numéro %d sort vers le médecin\n",sort->record.nom,sort->record.ticket);
         file.debut=file.debut->next ;
         
@@ -126,7 +132,7 @@ else if (reponse == 4)
             numerodessortie = numerodessortie +1 ;
         }else if (traitement == 2)
 {
-    listesdObservation *chainedobservation = malloc(sizeof(listesdObservation));
+	    chainedobservation = malloc(sizeof(listesdObservation));
     
     attribuerlit(chainedobservation, &nombrelits);
     printf("Le numéro de lit attribué automatiquement est : %d\n", chainedobservation->numerolit);
@@ -134,7 +140,7 @@ else if (reponse == 4)
     chainedobservation->record.ticket = sort->record.ticket;
     chainedobservation->record.age = sort->record.age;
     
-    int i = 0;
+	    i = 0;
     while (sort->record.nom[i] != '\0')
     {
         chainedobservation->record.nom[i] = sort->record.nom[i];
@@ -195,6 +201,14 @@ while (fgets(phrase, 300, listesdespatiant) != NULL) {
 }
 if (reponse == 6)
 {
+    courant = file.debut;
+    while (courant != NULL)
+    {
+        suivant = courant->next;
+        free(courant);
+        courant = suivant;
+    }
+
      listesdespatiant= fopen("fichier1.txt","w");
         fclose(listesdespatiant);
     
@@ -202,7 +216,6 @@ if (reponse == 6)
     file.fin = NULL;
     nombre = 0;
      printf("\nLa file d'attente a été initialisée\n");
-     free(node);
 }if (reponse == 2)
 {
 filedobservations= fopen("fichier2.txt","w");

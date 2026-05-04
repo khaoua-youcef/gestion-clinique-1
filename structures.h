@@ -8,21 +8,20 @@ typedef struct {
     int ticket ;
 } patient ;
   
-typedef struct tnode node ;
-typedef node *list;
-
-struct tnode
+typedef struct tnode
 {
     patient record;
     struct tnode *next;
-};
+} node;
+
+typedef node *list;
 typedef struct {
     node *debut;
     node *fin;
 } Filedattente;
 typedef struct Observation {
     patient record;
-    int numerolit;
+    int numerolit ;
     struct Observation *next;
 } listesdObservation;
 
