@@ -201,7 +201,7 @@ if (reponse == 6)
     file.debut = NULL;
     file.fin = NULL;
     nombre = 0;
-free(chaine) ;
+
 }if (reponse == 2)
 {
 filedobservations= fopen("fichier2.txt","w");
