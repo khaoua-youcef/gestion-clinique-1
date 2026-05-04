@@ -25,4 +25,7 @@ typedef struct Observation {
     int numerolit;
     struct Observation *next;
 } listesdObservation;
+
+void attribuerlit(listesdObservation *observation, int *nombrelits);
+
 #endif //khaoua youcef

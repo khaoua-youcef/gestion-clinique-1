@@ -21,6 +21,12 @@ void ticketplus(int *numero)
     }
 }
 
+void attribuerlit(listesdObservation *observation, int *nombrelits)
+{
+    *nombrelits = *nombrelits + 1;
+    observation->numerolit = *nombrelits;
+}
+
 int main ()
 {
     int nombre = 0 ;
@@ -35,24 +41,26 @@ int numerodobservation  = 0;
 int numerodessortie = 0 ;
 int numerodestransmit = 0 ;
 int nombretotales =0 ;
+int nombrelits = 0;
 
 FILE *filedobservations = NULL;
 listesdObservation *debutdobservations = NULL;
 reponse=1;
     while (reponse !=0)
 {
-printf ("             vous voulez faire quoi :\n");
-printf("0-arrter le programme-\n");
-printf ("1-prendre un ticket-\n");
- printf("2-inisialisation de la file d observation\n -");
-       printf("  3-afficher la file d attente (historique)-\n");
-        printf( "4-orientes vers le medcin-\n");
-        printf(" 5-le nombre de patient sortie-\n");
-        printf(" 6-initialisation la  file d attente-\n");
-        printf(" 7-le nombre de patient observes-\n");
-       printf("  8-le nombre des patient en totales-\n  ");
-       printf("9-le nombre des patiant transmis-\n") ;
-       printf("10-afficher la liste d observation-\n");
+printf ("             Que voulez-vous faire ?\n");
+printf("0-Arrêter le programme-\n");
+printf ("1-Prendre un ticket-\n");
+ printf("2-Initialisation de la file d'observation\n -");
+       printf("  3-Afficher la file d'attente (historique)-\n");
+        printf( "4-Orienter vers le médecin-\n");
+        printf(" 5-Le nombre de patients sortis-\n");
+        printf(" 6-Initialiser la file d'attente-\n");
+        printf(" 7-Le nombre de patients observés-\n");
+       printf("  8-Le nombre total de patients-\n  ");
+       printf("9-Le nombre de patients transmis-\n") ;
+       printf("10-Afficher la liste d'observation-\n");
+       printf("11-");
 
 scanf ("%d",&reponse);
 
@@ -60,16 +68,16 @@ if (reponse == 1) {
 
    ticketplus(&nombre);
 p.ticket=nombre+1;
-printf("veulliez remplire vos information\n");  
-         printf ("votre nom et prenom\n");
+printf("Veuillez remplir vos informations\n");  
+         printf ("Votre nom et prénom\n");
         scanf(" %[^\n]", p.nom);
-        printf ("votre age\n");
+        printf ("Votre âge\n");
     scanf("%d", & p.age);
-     printf("votre sex\n");
+     printf("Votre sexe\n");
     scanf("%s",p.sexe);
     
     listesdespatiant= fopen("fichier1.txt","a");
-    fprintf(listesdespatiant,"ticket numero : %d  / nom et prenom:%s / age:%d / Sexe:%s \n",p.ticket,p.nom,p.age,p.sexe);
+    fprintf(listesdespatiant,"Ticket numéro : %d  / Nom et prénom : %s / Âge : %d / Sexe : %s \n",p.ticket,p.nom,p.age,p.sexe);
     fclose(listesdespatiant);
     node *chaine=malloc(sizeof(node));
     chaine->record=p;
@@ -86,12 +94,12 @@ printf("veulliez remplire vos information\n");
     }
     
 
-      printf("le patient est enregistres son ticket est:%d\n",p.ticket);
+      printf("Le patient est enregistré. Son ticket est : %d\n",p.ticket);
 }
   if (reponse == 0)
 
 {
-  printf ("vous avez arreter le programme");
+  printf ("Vous avez arrêté le programme");
 
   return 1 ;
 
@@ -100,28 +108,28 @@ else if (reponse == 4)
 {
     if (file.debut==NULL)
     {
-        printf ("la file d attente dans la ram est vide\n");
+        printf ("La file d'attente dans la RAM est vide\n");
     } else
     {
         node *sort = file.debut;
-        printf("\n le patiant %s numero %d sort vers le medcin \n",sort->record.nom,sort->record.ticket);
+        printf("\nLe patient %s numéro %d sort vers le médecin\n",sort->record.nom,sort->record.ticket);
         file.debut=file.debut->next ;
         
-        printf("veulliez choisir :");
-        printf("1-le patient sort-\n ");
-        printf("2-le patient est sous observation-\n");
-        printf("3-le patient est envoyes dans un autre deparetement -\n ");
+        printf("Veuillez choisir :");
+        printf("1-Le patient sort-\n ");
+        printf("2-Le patient est sous observation avec lit automatique-\n");
+        printf("3-Le patient est envoyé dans un autre département-\n ");
         scanf("%d",&traitement);
         if (traitement == 1)
         {
-            printf("\n le patiant %s numero %d sort\n",sort->record.nom,sort->record.ticket);
+            printf("\nLe patient %s numéro %d sort\n",sort->record.nom,sort->record.ticket);
             numerodessortie = numerodessortie +1 ;
         }else if (traitement == 2)
 {
     listesdObservation *chainedobservation = malloc(sizeof(listesdObservation));
     
-    printf("Attribuer un numero de lit : ");
-    scanf("%d", &chainedobservation->numerolit);
+    attribuerlit(chainedobservation, &nombrelits);
+    printf("Le numéro de lit attribué automatiquement est : %d\n", chainedobservation->numerolit);
 
     chainedobservation->record.ticket = sort->record.ticket;
     chainedobservation->record.age = sort->record.age;
@@ -148,7 +156,7 @@ else if (reponse == 4)
     numerodobservation = numerodobservation +1 ;
 } else if (traitement == 3)
 {
-     printf("\n le patiant %s numero %d a etais transmit a un autre deparetemnt\n",sort->record.nom,sort->record.ticket);
+     printf("\nLe patient %s numéro %d a été transmis à un autre département\n",sort->record.nom,sort->record.ticket);
      numerodestransmit = numerodestransmit +1;
 }
 
@@ -168,21 +176,22 @@ else if (reponse == 4)
     listesdespatiant = fopen("fichier1.txt", "r");
     if (listesdespatiant == NULL)
     {
-        printf("\n la file d attente est vide\n");
+        printf("\nLa file d'attente n'est pas créée\n");
     } else
     {
         
 while (fgets(phrase, 300, listesdespatiant) != NULL) {
     printf("%s", phrase);
+    if (phrase == 0){
+        printf("La file d'attente est vide");
+    }
 }
     }fclose(listesdespatiant);
     
 } if (reponse == 8)
 {
-    ticketplus(&compteur);
-    printf("le nombre totales des pataient est %d \n",compteur);
     nombretotales = numerodessortie + numerodestransmit +numerodobservation ;
-    printf("c est juste pour verifier le nombre totales =%d\n",nombretotales);
+    printf("C'est juste pour vérifier le nombre total = %d\n",nombretotales);
 }
 if (reponse == 6)
 {
@@ -192,41 +201,40 @@ if (reponse == 6)
     file.debut = NULL;
     file.fin = NULL;
     nombre = 0;
-     printf("\n le file d attente  a etais initialisate \n");
+     printf("\nLa file d'attente a été initialisée\n");
+     free(node);
 }if (reponse == 2)
 {
 filedobservations= fopen("fichier2.txt","w");
-        fclose(listesdespatiant);
-     printf("\n le file d observation etais inisialiter \n");
+        fclose(filedobservations);
+        debutdobservations = NULL;
+        numerodobservation = 0;
+        nombrelits = 0;
+     printf("\nLa file d'observation a été initialisée\n");
 }
 if (reponse == 5)
 {
-    printf("le nmbre des persones sortie est : %d \n",numerodessortie);
+    printf("Le nombre de personnes sorties est : %d \n",numerodessortie);
 }if (reponse == 7)
 {
-    printf("le nombre des perssone sous observation est\n :%d",numerodobservation);
+    printf("Le nombre de personnes sous observation est\n :%d",numerodobservation);
 }if (reponse == 9)
 {
-    printf("le nombre des perssone transmis est :%d \n",numerodestransmit);
+    printf("Le nombre de personnes transmises est : %d \n",numerodestransmit);
 }
 if (reponse == 10)
 {
     filedobservations = fopen("fichier2.txt","r");
     if (filedobservations == NULL)
     {
-      printf("\n la file est vide");
+      printf("\nLa file est vide");
     } else {
     
 while (fgets(phrase, 300, filedobservations) != NULL) {
     printf("%s", phrase);
 } fclose(filedobservations);
 
-    
-
     }
-
-
-
 
 }
 }
