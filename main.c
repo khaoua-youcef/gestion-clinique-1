@@ -240,3 +240,4 @@ while (fgets(phrase, 300, filedobservations) != NULL) {
 }
 return 0 ;
 }  
+\\khaoua
