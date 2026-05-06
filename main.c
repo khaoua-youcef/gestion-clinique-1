@@ -191,7 +191,7 @@ while (fgets(phrase, 300, listesdespatiant) != NULL) {
 } if (reponse == 8)
 {
     nombretotales = numerodessortie + numerodestransmit +numerodobservation ;
-    printf("C'est juste pour verifier le nombre total = %d\n",nombretotales);
+    printf(" le nombre total des patiant= %d\n",nombretotales);
 }
 if (reponse == 6)
 {
@@ -231,7 +231,14 @@ if (reponse == 10)
     } else {
     
 while (fgets(phrase, 300, filedobservations) != NULL) {
-    printf("%s", phrase);
+    if (phrase == "");
+    {
+      printf("la file dobservation est dejas vide");
+    }
+    else{
+        printf("%s", phrase);
+    }
+    
 } fclose(filedobservations);
 
     }
