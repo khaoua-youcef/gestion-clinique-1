@@ -117,7 +117,7 @@ else if (reponse == 4)
         
         printf("Veuillez choisir :");
         printf("1-Le patient sort-\n ");
-        printf("2-Le patient est sous observation avec lit automatique-\n");
+        printf("2-Le patient est sous observation -\n");
         printf("3-Le patient est envoye dans un autre departement-\n ");
         scanf("%d",&traitement);
         if (traitement == 1)
@@ -240,4 +240,3 @@ while (fgets(phrase, 300, filedobservations) != NULL) {
 }
 return 0 ;
 }  
-\\khaoua
