@@ -182,7 +182,7 @@ else if (reponse == 4)
         
 while (fgets(phrase, 300, listesdespatiant) != NULL) {
     printf("%s", phrase);
-    if (phrase == 0){
+    if (phrase == NULL){
         printf("La file d'attente est vide");
     }
 }
@@ -231,13 +231,14 @@ if (reponse == 10)
     } else {
     
 while (fgets(phrase, 300, filedobservations) != NULL) {
-    if (phrase == "");
+    if (phrase == NULL)
     {
       printf("la file dobservation est dejas vide");
     }
-    else{
-        printf("%s", phrase);
-    }
+    else 
+    {
+        printf("%s", phrase);    }
+    
     
 } fclose(filedobservations);
 
