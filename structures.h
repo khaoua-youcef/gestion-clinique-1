@@ -18,13 +18,13 @@ typedef node *list;
 typedef struct {
     node *debut;
     node *fin;
-} Filedattente;
+} FileAttente;
 typedef struct Observation {
     patient record;
-    int numerolit ;
+    int numerolit;
     struct Observation *next;
-} listesdObservation;
+} ListeObservation;
 
-void attribuerlit(listesdObservation *observation, int *nombrelits);
+void attribuerlit(ListeObservation *observation, int *nombrelits);
 
 #endif //khaoua youcef

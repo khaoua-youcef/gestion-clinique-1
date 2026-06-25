@@ -3,6 +3,6 @@
 
 #define MAXNOM 50
 #define MAXSEXE 20
-#define MAXLIS 20
+#define MAXLITS 20
 
-#endif  
+#endif

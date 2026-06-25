@@ -22,7 +22,7 @@ void ticketplus(int *numero)
     }
 }
 
-void attribuerlit(listesdObservation *observation, int *nombrelits)
+void attribuerlit(ListeObservation *observation, int *nombrelits)
 {
     *nombrelits = *nombrelits + 1;
     observation->numerolit = *nombrelits;
@@ -31,21 +31,21 @@ void attribuerlit(listesdObservation *observation, int *nombrelits)
 int main ()
 {
     int nombre = 0 ;
- FILE *listesdespatiant=NULL ;
+ FILE *listesdespatients=NULL ;
     int reponse , compteur,traitement ;
     patient p ;
-    Filedattente file ;
+    FileAttente file ;
     file.debut = NULL;
     file.fin = NULL;
 char phrase[300];
 int numerodobservation  = 0;
 int numerodessortie = 0 ;
-int numerodestransmit = 0 ;
-int nombretotales =0 ;
+int numerodestransmis = 0 ;
+int nombretotal =0 ;
 int nombrelits = 0;
 
 FILE *filedobservations = NULL;
-listesdObservation *debutdobservations = NULL;
+ListeObservation *debutdobservations = NULL;
 reponse=1;
     while (reponse !=0)
 {
@@ -77,9 +77,9 @@ printf("Veuillez remplir vos informations\n");
      printf("Votre sexe\n");
     scanf("%s",p.sexe);
     
-    listesdespatiant= fopen("fichier1.txt","a");
-    fprintf(listesdespatiant,"Ticket numero : %d  / Nom et prenom : %s / age : %d / Sexe : %s \n",p.ticket,p.nom,p.age,p.sexe);
-    fclose(listesdespatiant);
+    listesdespatients= fopen("fichier1.txt","a");
+    fprintf(listesdespatients,"Ticket numero : %d  / Nom et prenom : %s / age : %d / Sexe : %s \n",p.ticket,p.nom,p.age,p.sexe);
+    fclose(listesdespatients);
     node *chaine=malloc(sizeof(node));
     chaine->record=p;
     chaine->next=NULL;
@@ -127,13 +127,13 @@ else if (reponse == 4)
             numerodessortie = numerodessortie +1 ;
         }else if (traitement == 2) 
 {
-    if (nombrelits >= MAXLIS)
+    if (nombrelits >= MAXLITS)
     {
-        printf("\n ERREUR Impossible d'ajouter le patient : Les  lits d'observation sont pleins \n")
+        printf("\nERREUR Impossible d'ajouter le patient : les lits d'observation sont pleins\n");
     }
     else {
     
-    listesdObservation *chainedobservation = malloc(sizeof(listesdObservation));
+    ListeObservation *chainedobservation = malloc(sizeof(ListeObservation));
     
     attribuerlit(chainedobservation, &nombrelits);
     printf("Le numero de lit attribue est : %d\n", chainedobservation->numerolit);
@@ -165,7 +165,7 @@ else if (reponse == 4)
 } else if (traitement == 3)
 {
      printf("\nLe patient %s numero %d a ete transmis a un autre departement\n",sort->record.nom,sort->record.ticket);
-     numerodestransmit = numerodestransmit +1;
+     numerodestransmis = numerodestransmis +1;
 }
 
          
@@ -181,35 +181,35 @@ else if (reponse == 4)
     
 } if (reponse == 3)
 {
-    listesdespatiant = fopen("fichier1.txt", "r");
-    if (listesdespatiant == NULL)
+    listesdespatients = fopen("fichier1.txt", "r");
+    if (listesdespatients == NULL)
     {
-        printf("\nLa file d'attente n'est pas creee\n");
+        printf("\nLa file d'attente n'existe pas\n");
     } else
     {
         
-while (fgets(phrase, 300, listesdespatiant) != NULL) {
+while (fgets(phrase, 300, listesdespatients) != NULL) {
     printf("%s", phrase);
     if (phrase == NULL){
         printf("La file d'attente est vide");
     }
 }
-    }fclose(listesdespatiant);
+    }fclose(listesdespatients);
     
 } if (reponse == 8)
 {
-    nombretotales = numerodessortie + numerodestransmit +numerodobservation ;
-    printf(" le nombre total des patiant= %d\n",nombretotales);
+    nombretotal = numerodessortie + numerodestransmis +numerodobservation ;
+    printf("Le nombre total de patients = %d\n",nombretotal);
 }
 if (reponse == 6)
 {
-     listesdespatiant= fopen("fichier1.txt","w");
-        fclose(listesdespatiant);
+     listesdespatients= fopen("fichier1.txt","w");
+        fclose(listesdespatients);
     
     file.debut = NULL;
     file.fin = NULL;
     nombre = 0;
-    printf("la file dattente a etais inisialiser\n");
+    printf("La file d'attente a ete initialisee\n");
 
 }if (reponse == 2)
 {
@@ -228,7 +228,7 @@ if (reponse == 5)
     printf("Le nombre de personnes sous observation est\n :%d",numerodobservation);
 }if (reponse == 9)
 {
-    printf("Le nombre de personnes transmises est : %d \n",numerodestransmit);
+    printf("Le nombre de personnes transmises est : %d \n",numerodestransmis);
 }
 if (reponse == 10)
 {
@@ -241,7 +241,7 @@ if (reponse == 10)
 while (fgets(phrase, 300, filedobservations) != NULL) {
     if (phrase == NULL)
     {
-      printf("la file dobservation est dejas vide");
+      printf("La file d'observation est deja vide");
     }
     else 
     {
@@ -255,4 +255,4 @@ while (fgets(phrase, 300, filedobservations) != NULL) {
 }
 }
 return 0 ;
-}  
+}
