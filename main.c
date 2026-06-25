@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include "structures.h"
 
+
 void ticketplus(int *numero) 
 {
     FILE *f = fopen("fichier1.txt", "r"); 
@@ -124,8 +125,14 @@ else if (reponse == 4)
         {
             printf("\nLe patient %s numero %d sort\n",sort->record.nom,sort->record.ticket);
             numerodessortie = numerodessortie +1 ;
-        }else if (traitement == 2)
+        }else if (traitement == 2) 
 {
+    if (nombrelits >= MAXLIS)
+    {
+        printf("\n ERREUR Impossible d'ajouter le patient : Les  lits d'observation sont pleins \n")
+    }
+    else {
+    
     listesdObservation *chainedobservation = malloc(sizeof(listesdObservation));
     
     attribuerlit(chainedobservation, &nombrelits);
@@ -154,6 +161,7 @@ else if (reponse == 4)
 
     printf("Le patient %s est au lit %d\n", sort->record.nom, chainedobservation->numerolit);
     numerodobservation = numerodobservation +1 ;
+    }
 } else if (traitement == 3)
 {
      printf("\nLe patient %s numero %d a ete transmis a un autre departement\n",sort->record.nom,sort->record.ticket);
