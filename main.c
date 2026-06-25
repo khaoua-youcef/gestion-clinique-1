@@ -32,7 +32,7 @@ int main ()
 {
     int nombre = 0 ;
  FILE *listesdespatients=NULL ;
-    int reponse , compteur,traitement ;
+    int reponse , traitement ;
     patient p ;
     FileAttente file ;
     file.debut = NULL;
@@ -71,16 +71,26 @@ if (reponse == 1) {
 p.ticket=nombre+1;
 printf("Veuillez remplir vos informations\n");  
          printf ("Votre nom et prenom\n");
-        scanf(" %[^\n]", p.nom);
+        scanf(" %49[^\n]", p.nom);
         printf ("Votre age\n");
     scanf("%d", & p.age);
      printf("Votre sexe\n");
-    scanf("%s",p.sexe);
+    scanf("%19s",p.sexe);
     
     listesdespatients= fopen("fichier1.txt","a");
+    if (listesdespatients == NULL)
+    {
+        perror("Erreur ouverture fichier1.txt");
+        continue;
+    }
     fprintf(listesdespatients,"Ticket numero : %d  / Nom et prenom : %s / age : %d / Sexe : %s \n",p.ticket,p.nom,p.age,p.sexe);
     fclose(listesdespatients);
     node *chaine=malloc(sizeof(node));
+    if (chaine == NULL)
+    {
+        printf("Erreur allocation memoire\n");
+        continue;
+    }
     chaine->record=p;
     chaine->next=NULL;
     if (file.debut == NULL)
@@ -102,7 +112,7 @@ printf("Veuillez remplir vos informations\n");
 {
   printf ("Vous avez arrete le programme");
 
-  return 1 ;
+  return 0 ;
 
 }
 else if (reponse == 4)
@@ -134,6 +144,12 @@ else if (reponse == 4)
     else {
     
     ListeObservation *chainedobservation = malloc(sizeof(ListeObservation));
+    if (chainedobservation == NULL)
+    {
+        printf("Erreur allocation memoire\n");
+        free(sort);
+        continue;
+    }
     
     attribuerlit(chainedobservation, &nombrelits);
     printf("Le numero de lit attribue est : %d\n", chainedobservation->numerolit);
@@ -204,6 +220,11 @@ while (fgets(phrase, 300, listesdespatients) != NULL) {
 if (reponse == 6)
 {
      listesdespatients= fopen("fichier1.txt","w");
+     if (listesdespatients == NULL)
+     {
+        perror("Erreur ouverture fichier1.txt");
+        continue;
+     }
         fclose(listesdespatients);
     
     file.debut = NULL;
@@ -214,6 +235,11 @@ if (reponse == 6)
 }if (reponse == 2)
 {
 filedobservations= fopen("fichier2.txt","w");
+        if (filedobservations == NULL)
+        {
+            perror("Erreur ouverture fichier2.txt");
+            continue;
+        }
         fclose(filedobservations);
         debutdobservations = NULL;
         numerodobservation = 0;
