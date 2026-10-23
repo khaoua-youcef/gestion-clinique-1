@@ -3,7 +3,24 @@
 #include<stdbool.h>
 #include<sqlite3.h>
 #include"DATA_BASE.h"
+bool cree_tble (sqlite3*X ){
+    char *errmsg=NULL;
+  const char *sql ="CREATE TABLE IF NOT EXISTS patiant("
+  " tickets INTEGER PRIMARY KEY AUTOINCREMENT,"  
+  "nom TEXT ,"
+  "age INTEGER ,"
+  "sex TEXT  );";
+   int fl =sqlite3_exec(X,sql,NULL,0,&errmsg);
+   if (fl==SQLITE_OK){
+    return true ;
+   }else{
+    printf("l erreur : %s \n",errmsg);
+    sqlite3_free(errmsg);
+    return false ;
+   }
+}
 int main(){
+    bool  MN ;
 sqlite3 *db;
  char *errmsg=NULL;
 int rc = sqlite3_open("fichier1",&db);
@@ -12,20 +29,13 @@ printf("il ya une erreur dans la base de donnes %s",sqlite3_errmsg(db));
 
 } else {
     printf("la base de donnes est ouverte\n");
-   const char * sql ="CREATE TABLE IF NOT EXISTS patiant ("
-   "ticket INTEGER PRIMARY KEY AUTOINCREMENT,"
-   "nom TEXT,"
-   "age INT,"
-   " sex TEXT);";
-    int fl  = sqlite3_exec (db,sql,NULL,0,&errmsg);
-  if(fl==SQLITE_OK){
-printf("la table est crree\n");
-  } else{
-printf("il y a un probleme dans %s",errmsg);
-sqlite3_free(errmsg);
+       MN = cree_tble(db);
+       if (MN==true){
+        printf("la table est cree \n");
+       }else{
+        printf("il ya une erreur la table n est pas cree\n");
+       }
 
-  }
-  sqlite3_close(db);
 }
 
     return 0;
